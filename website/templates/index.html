@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diabetes Prediction</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(to right, #6a11cb, #2575fc);
+        color: #fff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .container {
+        background: #fff;
+        color: #333;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+      }
+      h1 {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+      }
+      label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        text-align: left;
+      }
+      input[type="text"] {
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      button {
+        background-color: #6a11cb;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #2575fc;
+      }
+      .prediction {
+        margin-top: 20px;
+        font-size: 18px;
+        font-weight: bold;
+      }
+      .positive {
+        color: red;
+      }
+      .negative {
+        color: green;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Diabetes Prediction</h1>
+      <form method="POST" action="/predict">
+        <label for="pregnancies">Pregnancies:</label>
+        <input
+          type="number"
+          id="pregnancies"
+          name="pregnancies"
+          placeholder="Number of pregnancies"
+          required />
+
+        <label for="glucose">Glucose:</label>
+        <input
+          type="number"
+          id="glucose"
+          name="glucose"
+          placeholder="Glucose level (mg/dL)"
+          required />
+
+        <label for="bloodPressure">Blood Pressure:</label>
+        <input
+          type="number"
+          id="bloodPressure"
+          name="bloodPressure"
+          placeholder="Blood pressure (mmHg)"
+          required />
+
+        <label for="skinThickness">Skin Thickness:</label>
+        <input
+          type="number"
+          id="skinThickness"
+          name="skinThickness"
+          placeholder="Skin thickness (mm)"
+          required />
+
+        <label for="insulin">Insulin:</label>
+        <input
+          type="number"
+          id="insulin"
+          name="insulin"
+          placeholder="Insulin level (μU/mL)"
+          required />
+
+        <label for="bmi">BMI:</label>
+        <input
+          type="number"
+          step="0.1"
+          id="bmi"
+          name="bmi"
+          placeholder="Body Mass Index (e.g., 25.5)"
+          required />
+
+        <label for="dpf">Diabetes Pedigree Function:</label>
+        <input
+          type="number"
+          step="0.01"
+          id="dpf"
+          name="dpf"
+          placeholder="Diabetes pedigree (e.g., 0.471)"
+          required />
+
+        <label for="age">Age:</label>
+        <input
+          type="number"
+          id="age"
+          name="age"
+          placeholder="Age in years"
+          required />
+
+        <button type="submit">Predict</button>
+      </form>
+
+      {% if prediction_text %}
+      <div
+        class="prediction {{ 'positive' if 'Positive' in prediction_text else 'negative' }}">
+        {{ prediction_text }}
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
